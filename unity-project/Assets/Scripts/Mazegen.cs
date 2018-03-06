@@ -65,12 +65,14 @@ public class Mazegen : MonoBehaviour {
           }
           ptype.transform.parent = transform;
         } else if (Maze[i, j] == 0) {
-          if (!(UnityEngine.Random.value > 0.9)) {
+          if (!(UnityEngine.Random.value > 0.9) || (i == 1 && j == 1)) {
             floor = Instantiate(floorPrefab) as GameObject;
             floor.transform.position = new Vector3(i * ptype.transform.localScale.x, 0, j * ptype.transform.localScale.z);
-            if (UnityEngine.Random.value > 0.5) {
+            floor.transform.parent = transform;
+            if (UnityEngine.Random.value > 0.5 && i != 1 && j != 1) {
               coin = Instantiate(pointsPrefab) as GameObject;
-              coin.transform.position = new Vector3(i * ptype.transform.localScale.x, 0, j * ptype.transform.localScale.z);
+              coin.transform.position = new Vector3(i * ptype.transform.localScale.x, 1.5f, j * ptype.transform.localScale.z);
+              coin.transform.parent = transform;
             }
           }
           MazeString = MazeString + ".";
