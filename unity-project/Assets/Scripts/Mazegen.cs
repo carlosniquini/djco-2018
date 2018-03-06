@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 public class Mazegen : MonoBehaviour {
   public int width, height;
+  public float y;
+  public GameObject pointsPrefab;
+  public GameObject floorPrefab;
   public Material brick;
   private int[,] Maze;
   private Stack<Vector2> _tiletoTry = new Stack<Vector2>();
@@ -47,26 +50,37 @@ public class Mazegen : MonoBehaviour {
     _tiletoTry.Push(CurrentTile);
     Maze = CreateMaze();  // generate the maze in Maze Array.
     GameObject ptype = null;
+    GameObject coin = null;
+    GameObject floor = null;
     for (int i = 0; i <= Maze.GetUpperBound(0); i++) {
       for (int j = 0; j <= Maze.GetUpperBound(1); j++) {
         if (Maze[i, j] == 1) {
-          MazeString = MazeString + "X";  // added to create String
+          MazeString = MazeString + "X";
           ptype = GameObject.CreatePrimitive(PrimitiveType.Cube);
-          ptype.transform.position = new Vector3(i * ptype.transform.localScale.x, 0, j * ptype.transform.localScale.z);
+          ptype.transform.position = new Vector3(i * ptype.transform.localScale.x, y, j * ptype.transform.localScale.z);
+          ptype.transform.localScale = new Vector3(1.0f, 4.0f, 1.0f);
 
           if (brick != null) {
             ptype.GetComponent<Renderer>().material = brick;
           }
           ptype.transform.parent = transform;
         } else if (Maze[i, j] == 0) {
-          MazeString = MazeString + "."; // added to create String
+          if (!(UnityEngine.Random.value > 0.9)) {
+            floor = Instantiate(floorPrefab) as GameObject;
+            floor.transform.position = new Vector3(i * ptype.transform.localScale.x, 0, j * ptype.transform.localScale.z);
+            if (UnityEngine.Random.value > 0.5) {
+              coin = Instantiate(pointsPrefab) as GameObject;
+              coin.transform.position = new Vector3(i * ptype.transform.localScale.x, 0, j * ptype.transform.localScale.z);
+            }
+          }
+          MazeString = MazeString + ".";
         }
       }
-      MazeString = MazeString + "\n";  // added to create String
+      MazeString = MazeString + "\n";
     }
-    print(MazeString);  // added to create String
+    print(MazeString);
   }
-  // =======================================
+
   public int[,] CreateMaze() {
 
     //local variable to store neighbors to the current square as we work our way through the maze
