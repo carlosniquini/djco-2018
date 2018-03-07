@@ -26,7 +26,7 @@ public class Player : MonoBehaviour {
       //Debug.Log("Coletou");
     }
     if (other.gameObject.CompareTag("Finish")) {
-      Debug.Log("Vc chegou!");
+      GameObject.Find("GameController").GetComponent<GameController>().Finish();
     }
   }
   /*
