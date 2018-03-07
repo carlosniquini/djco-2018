@@ -25,6 +25,9 @@ public class Player : MonoBehaviour {
       other.gameObject.GetComponent<Points>().Collected();
       //Debug.Log("Coletou");
     }
+    if (other.gameObject.CompareTag("Finish")) {
+      Debug.Log("Vc chegou!");
+    }
   }
   /*
   private Rigidbody rb;
