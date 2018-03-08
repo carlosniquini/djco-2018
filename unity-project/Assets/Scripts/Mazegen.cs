@@ -7,6 +7,8 @@ using System.Collections.Generic;
 
 public class Mazegen : MonoBehaviour {
   public int width, height;
+  public GameObject wall;
+  public GameObject wall_door;
   public float y;
   public GameObject pointsPrefab;
   public GameObject floorPrefab;
@@ -58,9 +60,19 @@ public class Mazegen : MonoBehaviour {
       for (int j = 0; j <= Maze.GetUpperBound(1); j++) {
         if (Maze[i, j] == 1) {
           MazeString = MazeString + "X";
-          ptype = GameObject.CreatePrimitive(PrimitiveType.Cube);
-          ptype.transform.position = new Vector3(i * ptype.transform.localScale.x, y, j * ptype.transform.localScale.z);
-          ptype.transform.localScale = new Vector3(1.0f, 4.0f, 1.0f);
+
+          if (!(UnityEngine.Random.value > 0.95)) {
+            ptype = Instantiate(wall) as GameObject;
+            ptype.transform.position = new Vector3(i * ptype.transform.localScale.x, y, j * ptype.transform.localScale.z);
+            //ptype.transform.localScale = new Vector3(1.0f, 4.0f, 1.0f);
+          } else {
+            ptype = Instantiate(wall_door) as GameObject;
+            ptype.transform.position = new Vector3(i * ptype.transform.localScale.x, y, j * ptype.transform.localScale.z);
+            //ptype.transform.localScale = new Vector3(1.0f, 4.0f, 1.0f);
+          }
+          //ptype = GameObject.CreatePrimitive(PrimitiveType.Cube);
+          //ptype.transform.position = new Vector3(i * ptype.transform.localScale.x, y, j * ptype.transform.localScale.z);
+          //ptype.transform.localScale = new Vector3(1.0f, 4.0f, 1.0f);
 
           if (brick != null) {
             ptype.GetComponent<Renderer>().material = brick;
