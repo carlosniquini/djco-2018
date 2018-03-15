@@ -35,6 +35,8 @@ public class TransformFollower : MonoBehaviour {
     // compute rotation
     if (lookAt) {
       transform.LookAt(target);
+      //transform.Rotate(-20, 0, 0);
+      //transform.position = transform.position + new Vector3(0, 0, -1.5f);
     } else {
       transform.rotation = target.rotation;
     }
