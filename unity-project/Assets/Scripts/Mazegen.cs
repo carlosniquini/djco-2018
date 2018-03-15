@@ -7,9 +7,12 @@ using System.Collections.Generic;
 
 public class Mazegen : MonoBehaviour {
   public int width, height;
+  public GameObject wall;
+  public GameObject wall_door;
   public float y;
   public GameObject pointsPrefab;
   public GameObject floorPrefab;
+  public GameObject endPointPrefab;
   public Material brick;
   private int[,] Maze;
   private Stack<Vector2> _tiletoTry = new Stack<Vector2>();
@@ -52,33 +55,51 @@ public class Mazegen : MonoBehaviour {
     GameObject ptype = null;
     GameObject coin = null;
     GameObject floor = null;
+    GameObject endPoint = null;
     for (int i = 0; i <= Maze.GetUpperBound(0); i++) {
       for (int j = 0; j <= Maze.GetUpperBound(1); j++) {
         if (Maze[i, j] == 1) {
           MazeString = MazeString + "X";
-          ptype = GameObject.CreatePrimitive(PrimitiveType.Cube);
-          ptype.transform.position = new Vector3(i * ptype.transform.localScale.x, y, j * ptype.transform.localScale.z);
-          ptype.transform.localScale = new Vector3(1.0f, 4.0f, 1.0f);
+
+          if (!(UnityEngine.Random.value > 0.95)) {
+            ptype = Instantiate(wall) as GameObject;
+            ptype.transform.position = new Vector3(i * ptype.transform.localScale.x, y, j * ptype.transform.localScale.z);
+            //ptype.transform.localScale = new Vector3(1.0f, 4.0f, 1.0f);
+          } else {
+            ptype = Instantiate(wall_door) as GameObject;
+            ptype.transform.position = new Vector3(i * ptype.transform.localScale.x, y, j * ptype.transform.localScale.z);
+            //ptype.transform.localScale = new Vector3(1.0f, 4.0f, 1.0f);
+          }
+          //ptype = GameObject.CreatePrimitive(PrimitiveType.Cube);
+          //ptype.transform.position = new Vector3(i * ptype.transform.localScale.x, y, j * ptype.transform.localScale.z);
+          //ptype.transform.localScale = new Vector3(1.0f, 4.0f, 1.0f);
 
           if (brick != null) {
             ptype.GetComponent<Renderer>().material = brick;
           }
           ptype.transform.parent = transform;
         } else if (Maze[i, j] == 0) {
-          if (!(UnityEngine.Random.value > 0.9)) {
-            floor = Instantiate(floorPrefab) as GameObject;
-            floor.transform.position = new Vector3(i * ptype.transform.localScale.x, 0, j * ptype.transform.localScale.z);
-            if (UnityEngine.Random.value > 0.5) {
-              coin = Instantiate(pointsPrefab) as GameObject;
-              coin.transform.position = new Vector3(i * ptype.transform.localScale.x, 0, j * ptype.transform.localScale.z);
-            }
+          //if (!(UnityEngine.Random.value > 0.9) || (i == 1 && j == 1)) {
+          floor = Instantiate(floorPrefab) as GameObject;
+          floor.transform.position = new Vector3(i * ptype.transform.localScale.x, 0, j * ptype.transform.localScale.z);
+          floor.transform.parent = transform;
+          if (UnityEngine.Random.value > 0.5 && i != 1 && j != 1) {
+            coin = Instantiate(pointsPrefab) as GameObject;
+            coin.transform.position = new Vector3(i * ptype.transform.localScale.x, 1.5f, j * ptype.transform.localScale.z);
+            coin.transform.parent = transform;
           }
+          //}
           MazeString = MazeString + ".";
+        }
+        if (i == width - 2 && j == height - 2) {
+          endPoint = Instantiate(endPointPrefab) as GameObject;
+          endPoint.transform.position = new Vector3(i * endPoint.transform.localScale.x, 1f, j * endPoint.transform.localScale.z);
+          endPoint.transform.parent = transform;
         }
       }
       MazeString = MazeString + "\n";
     }
-    print(MazeString);
+    //print(MazeString);
   }
 
   public int[,] CreateMaze() {
