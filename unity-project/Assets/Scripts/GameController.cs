@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour {
   // Use this for initialization
   void Start () {
     mapa = Instantiate(mapaPrefab) as GameObject;
-    player = GameObject.Find("Player");
+    player = GameObject.Find("MaleFreeSimpleMovement1");
     canvasMenu = GameObject.Find("CanvasMenu");
     canvasMsg = GameObject.Find("CanvasMsg");
     btnStart = GameObject.Find("BtnStart").GetComponent<Button>() as Button;
