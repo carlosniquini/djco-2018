@@ -14,14 +14,14 @@ public class Player : MonoBehaviour {
 
   public void replay() {
     coffee = 0;
-    GameObject.Find("CoffeeText").GetComponent<Text>().text = "Coffee: " + coffee;
+    GameObject.Find("CoffeeText").GetComponent<Text>().text = "" + coffee;
     gameObject.transform.position = new Vector3(1, 5, 1);
   }
 
   void OnTriggerEnter(Collider other) {
     if (other.gameObject.CompareTag("Mug")) {
       coffee++;
-      GameObject.Find("CoffeeText").GetComponent<Text>().text = "Coffee: " + coffee;
+      GameObject.Find("CoffeeText").GetComponent<Text>().text = "" + coffee;
       other.gameObject.GetComponent<Points>().Collected();
       //Debug.Log("Coletou");
     }
