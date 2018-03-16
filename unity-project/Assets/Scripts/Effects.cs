@@ -10,7 +10,7 @@ public static class Effects {
     while (i < text.Length) {
       obj.text = obj.text + text[i];
       i++;
-      yield return new WaitForSeconds(0.04f);
+      yield return new WaitForSeconds(0.02f);
     }
 
   }

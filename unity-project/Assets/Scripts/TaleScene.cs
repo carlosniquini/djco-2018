@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TaleScene : MonoBehaviour {
 
-  public string text;
+  string text = "Welcome to your first day of ERASMUS at FEUP.\nThe class will start so hurry up to find your class!\nYour class is on B205, have enough coffee to save time\n and beware of the holes.\nGood luck!";
 
   // Use this for initialization
   void Start () {

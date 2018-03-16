@@ -6,17 +6,29 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/mainMenu.unity
+    path: Assets/Scenes/intro.unity
+    guid: cb04d0e5df56f0e42b19a2526d0013f2
+  - enabled: 1
+    path: Assets/Scenes/mainMenu.unity
     guid: 9b6f27791f35b1542aa64e3ec080f4b9
   - enabled: 1
-    path: Assets/selectPlace.unity
+    path: Assets/Scenes/selectPlace.unity
     guid: 594151b6f77767f49a23cf2ebba18117
   - enabled: 1
-    path: Assets/selectPlayer.unity
+    path: Assets/Scenes/selectPlayer.unity
     guid: 5b41f73648064514e8ae11eb043017e5
   - enabled: 1
-    path: Assets/main.unity
+    path: Assets/Scenes/main.unity
     guid: a2b8566c63e9009449f0701a02a64800
   - enabled: 1
-    path: Assets/tale.unity
+    path: Assets/Scenes/tale.unity
     guid: 30aede3e8b43deb41a3da5112eeb798c
+  - enabled: 1
+    path: Assets/Scenes/end.unity
+    guid: e8146ff4c41eb574b99df786cfeb4960
+  - enabled: 1
+    path: Assets/Scenes/about.unity
+    guid: 7ed5d9304d3e4a945a5945d5c6fd85ef
+  - enabled: 1
+    path: Assets/Scenes/instructions.unity
+    guid: 0de4e4b5a813014479281620b426e465

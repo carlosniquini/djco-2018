@@ -45,6 +45,10 @@ public class Transition : MonoBehaviour {
     SceneManager.LoadScene(cena);
   }
 
+  public void mainMenuScene() {
+    StartCoroutine(Fade("mainMenu"));
+  }
+
   public void taleScene() {
     StartCoroutine(Fade("tale"));
   }
@@ -58,6 +62,19 @@ public class Transition : MonoBehaviour {
   }
 
   public void mainScene() {
-    SceneManager.LoadScene("main");
+    StartCoroutine(Fade("main"));
+    //SceneManager.LoadScene("main");
+  }
+
+  public void endScene() {
+    StartCoroutine(Fade("end"));
+  }
+
+  public void aboutScene() {
+    StartCoroutine(Fade("about"));
+  }
+
+  public void instructScene() {
+    StartCoroutine(Fade("instructions"));
   }
 }

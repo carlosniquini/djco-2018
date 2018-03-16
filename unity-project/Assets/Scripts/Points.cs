@@ -15,7 +15,7 @@ public class Points : MonoBehaviour {
   }
 
   public void Collected() {
-    //GetComponentInParent<AudioSource>().Play();
+    //this.GetComponentInParent<AudioSource>().Play();
     Destroy(gameObject);
   }
 }

@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
   public GameObject mapaPrefab;
   public float initialTime;
   private float timer;
+  private float totalTimer = 0;
   private GameObject player;
   //private GameObject canvasMenu;
   //private GameObject canvasMsg;
@@ -55,12 +56,19 @@ public class GameController : MonoBehaviour {
   private void Timer() {
     GameObject.Find("TimerText").GetComponent<Text>().text = timer.ToString("F2");
     timer = timer - Time.deltaTime;
+    totalTimer += Time.deltaTime;
     if (timer <= 0) {
       status = false;
       //canvasMsg.SetActive(true);
       //GameObject.Find("TextRestart").GetComponent<Text>().text = "Você caiu no limbo do Blobo B. \n Tente mais uma vez";
-      Restart();
+      //Restart();
+      PlayerPrefs.SetInt("status", 0);
+      Finish();
     }
+  }
+
+  public void AddTime() {
+    timer += 2.0f;
   }
 
   private void Restart() {
@@ -72,8 +80,10 @@ public class GameController : MonoBehaviour {
 
   public void Finish() {
     status = false;
+    PlayerPrefs.SetFloat("time", totalTimer);
+    GameObject.Find("Transition").GetComponent<Transition>().endScene();
     //canvasMsg.SetActive(true);
     //GameObject.Find("TextRestart").GetComponent<Text>().text = "Você chegou!. \n Mas sua proxima aula é em um novo bloco, \n corra quando acabar essa aula.";
-    Restart();
+    //Restart();
   }
 }
